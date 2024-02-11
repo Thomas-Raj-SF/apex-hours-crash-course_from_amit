@@ -1,0 +1,35 @@
+<template>
+    <lightning-card variant="Narrow" title="Apex Hours" icon-name="standard:contact">
+        <div class="slds-m-around_large container">
+            <template if:true={contacts} for:each={contacts} for:item="con" for:index="index" >
+                <div class="contact-item" key={con.id}>
+                    <img class="profile-pic" src={con.picture} alt="Contact Picture" /> <br/>
+                    {con.first_name} &nbsp; {con.last_name} <br/>
+                    <lightning-formatted-email value={con.email} ></lightning-formatted-email>&nbsp;
+                    <lightning-formatted-phone value={con.cell} ></lightning-formatted-phone>
+                    <br/>
+                    {con.location} <br/>
+                    <p if:true={con.address}> <!-- if:false -->
+                        {con.address.street}
+                    </p>
+                    <!-- nested if-else -->
+                    <p lwc:if={con.address}>
+                        {con.address.street}
+                    </p>
+                    <p lwc:elseif={con.address1}>
+                        {con.address.street}
+                    </p>
+                    <p lwc:elseif={con.address2}>
+                        {con.address.street}
+                    </p>
+                    <p lwc:else>
+                        No Address Found
+                    </p>
+                </div>
+            </template>
+        </div>
+        <div slot="footer">
+            <a href="https://www.apexhours.com" target="_blank">www.apexhours.com</a>
+        </div>
+    </lightning-card>
+</template>
