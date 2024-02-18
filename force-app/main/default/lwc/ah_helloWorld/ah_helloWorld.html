@@ -1,7 +1,8 @@
 <template>
     <lightning-card  variant="Narrow"  title="Apex Hours" icon-name="doctype:video">
+        <lightning-spinner alternative-text="loading....." size="small" variant="brand" if:true={isLoading}></lightning-spinner>
         <lightning-button icon-name="utility:down" label="Click Me" 
-            value="Click Me" slot="actions">
+            value="Click Me" slot="actions" onclick={handleClick} >
         </lightning-button>
         <div class="slds-m-around_large">
             <h1 class="slds-text-heading_large slds-align_absolute-center"> 
@@ -24,7 +25,7 @@
             </div> -->
         </div>
         <div slot="footer">
-            <a href="https://www.apexhours.com" target="_blank">www.apexhours.com</a>
+            <a onclick={hanleNav} href="https://www.apexhours.com" target="_blank">www.apexhours.com</a>
         </div>
     </lightning-card>
 </template>

@@ -1,0 +1,12 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+}
+.container{
+    background-color: aliceblue;
+}
+.profile-pic{
+    border-radius: 50%;
+}
+.contact-item{
+    margin: 20px;
+}

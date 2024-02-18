@@ -1,0 +1,65 @@
+<template>
+    <lightning-card  variant="Narrow" title="Events in LWC with ApexHours.com" icon-name="doctype:video">
+        
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="4" >
+                <div class="slds-m-around_large" oncontactclick={handleContactClick}> <!-- bubble: true, composed: false -->
+                    <template if:true={contacts} for:each={contacts} for:item="con" for:index="index">
+                        <!-- Call the child component to display the contact information -->
+                        <!--
+                            12 - 12 Event handlers will be placed
+                            1K - 1K Event handlers will be placed
+                            4K - 4K Event handlers will be placed
+                        -->
+                        <c-ah_contact-tile key={con.id} contact={con} > </c-ah_contact-tile>
+                    </template>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="8">
+                <div if:true={selectedRecord} class="slds-m-around_large">
+                    <img class="profile-pic" src={selectedRecord.picture} alt="Contact Picture" /> <br/>
+                    <span >{selectedRecord.first_name}&nbsp;{selectedRecord.last_name} </span> <br/>
+                    <lightning-formatted-email value={selectedRecord.email} ></lightning-formatted-email>&nbsp;
+                    <lightning-formatted-phone value={selectedRecord.cell} ></lightning-formatted-phone>
+                    <br/>
+                    {selectedRecord.location} <br/>
+                    <p lwc:if={selectedRecord.address}>
+                        {selectedRecord.address.street}
+                    </p>
+                    <p lwc:else>
+                        No Address Found
+                    </p>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        
+        
+        <div class="slds-m-around_large">
+            <h1>Inside Parent Component</h1>
+            <span>Value from Child Component: </span>
+            <span style="color: crimson;">
+                {childMessage}
+            </span>
+            <div>
+                <span style="color: blue;">Calling Child Component</span>
+                <br/>
+                <!-- 
+                    Child Component 
+                    Cebab Case
+                        helloWorld
+                        <c-hello-world></c-hello-world>
+                        myLWC
+                        <c-my-l-w-c></c-my-l-w-c>
+                -->
+                <c-ah_child lwc:ref="ahChild1" message={message}
+                    record-id="0017867867nbueBhj"
+                    onselect={handleCustomEvent}>
+                </c-ah_child>
+            </div>
+        </div>
+        <div slot="footer">
+            <a href="https://www.apexhours.com" target="_blank">www.apexhours.com</a>
+        </div>
+    </lightning-card>
+</template>

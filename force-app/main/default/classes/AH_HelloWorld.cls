@@ -8,4 +8,9 @@ public with sharing class AH_HelloWorld {
     public static List<Contact> getContacts(String accountId, String email){
         return [SELECT Id, Name FROM Contact WHERE AccountId =: accountId];
     }
+
+    @AuraEnabled
+    public static List<Opportunity> getOpps(){
+        return [SELECT Id, Name FROM Opportunity LIMIT 10];
+    }
 }

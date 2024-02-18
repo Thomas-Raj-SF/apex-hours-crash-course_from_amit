@@ -1,12 +1,14 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import welcomeMessage from '@salesforce/apex/AH_HelloWorld.sayHello';
 import getContacts from '@salesforce/apex/AH_HelloWorld.getContacts';
+import getOpportunities from '@salesforce/apex/AH_HelloWorld.getOpps';
 export default class HelloWorld extends LightningElement {
     message = '';
     error = '';
     @api recordId; 
     accountId = '';
     salesforceContacts;
+    isLoading = false;
     // public variable, 
     // home page, app page,
     // record page, experience cloud, flow
@@ -88,6 +90,31 @@ export default class HelloWorld extends LightningElement {
             this.error = JSON.stringify(error);
             console.error(error);
         }
+    }
+
+    handleClick(event){
+        event.preventDefault();
+        this.isLoading = true;
+        let buttonComponent = event.currentTarget;
+        let button = event.target;
+        console.log(buttonComponent);
+        console.log(button);
+        getOpportunities()
+        .then((result)=>{
+            console.log('Opp Data ', result);
+        })
+        .catch((error)=>{
+            console.error(error);
+        })
+        .finally(()=>{
+            // cleanup logic
+            console.log('finally executed');
+            this.isLoading = false;
+        });
+    }
+
+    hanleNav(event){
+        event.preventDefault();
     }
 
 }
